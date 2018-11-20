@@ -5,7 +5,7 @@ using AspNet.Security.OAuth.GitHub;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.Azure.SignalR.Samples.ChatRoom
+namespace ChatRoom
 {
     [Route("/")]
     public class AuthController : Controller
