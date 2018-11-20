@@ -1,14 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-
+[Authorize]
 public class Chat : Hub
 {
-    public void BroadcastMessage(string name, string message)
+    public void BroadcastMessage(string message)
     {
-        Clients.All.SendAsync("broadcastMessage", name, message);
+        Clients.All.SendAsync("broadcastMessage", Context.User.Identity.Name, message);
     }
 
-    public void Echo(string name, string message)
+    public void Echo(string message)
     {
-        Clients.Client(Context.ConnectionId).SendAsync("echo", name, message + " (echo from server)");
+        Clients.Client(Context.ConnectionId).SendAsync("echo", Context.User.Identity.Name, message + " (echo from server)");
     }
 }

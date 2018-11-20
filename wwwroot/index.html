@@ -104,7 +104,7 @@
                 document.getElementById('sendmessage').addEventListener('click', function (event) {
                     // Call the broadcastMessage method on the hub.
                     if (messageInput.value) {
-                        connection.send('broadcastMessage', username, messageInput.value);
+                        connection.send('broadcastMessage', messageInput.value);
                     }
 
                     // Clear text box and reset focus for next comment.
@@ -148,7 +148,15 @@
                     onConnected(connection);
                 })
                 .catch(function (error) {
+                    if (error)
+                    {
                     console.error(error.message);
+                    }
+                    if (error.statusCode && error.statusCode === 401) {
+                        {
+                            appendMessage('_BROADCAST_', 'You\'re not logged in. Click <a href="/login">here</a> to login with GitHub.');
+                        }
+                    }
                 });
         });
     </script>
